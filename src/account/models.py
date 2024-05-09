@@ -7,7 +7,6 @@ from django.db import models
 
 
 class MyUser(User):
-    avatar = models.ImageField(default='default.jpg', upload_to='profile_images')
     referred_by = models.CharField(default=None)
 
     class Meta:
