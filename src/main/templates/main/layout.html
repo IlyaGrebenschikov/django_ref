@@ -12,6 +12,9 @@
             <a href="{% url 'register' %}"><li><i class="fa-solid fa-house"></i> Регистрация</li></a>
             <a href="{% url 'login' %}"><li><i class="fa-solid fa-house"></i> Вход </li></a>
             <a href="{% url 'logout' %}"><li><i class="fa-solid fa-house"></i> Выход </li></a>
+            {% if user.pk %}
+                <a href="{% url 'user-details' pk=user.pk %}"><li><i class="fa-solid fa-house"></i> Аккаунт </li></a>
+            {% endif %}
         </ul>
     </aside>
     <main>

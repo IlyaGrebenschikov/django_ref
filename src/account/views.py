@@ -9,6 +9,7 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth import authenticate, login
+from django.urls import reverse
 
 from .forms import MyCreationForm
 from .models import MyUser
@@ -40,6 +41,9 @@ class UserDetailView(LoginRequiredMixin, DetailView):
         current_user = self.request.user
         filtered_queryset = queryset.filter(pk=current_user.pk)
         return filtered_queryset
+    
+    def get_absolute_url(self):
+        return reverse('user_detail', kwargs={'pk': self.pk})
 
 
 class MyLoginView(LoginView):
