@@ -7,7 +7,7 @@ from django.db import models
 
 
 class MyUser(User):
-    referred_by = models.CharField(default=None)
+    referred_by = models.CharField(default=None, null=True)
 
     class Meta:
         verbose_name = 'Пользователь'
