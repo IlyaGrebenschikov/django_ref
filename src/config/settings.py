@@ -49,6 +49,7 @@ INSTALLED_APPS = [
 
     # local
     'main.apps.MainConfig',
+    'account.apps.AccountConfig',
 
 ]
 
