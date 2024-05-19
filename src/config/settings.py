@@ -53,6 +53,7 @@ INSTALLED_APPS = [
     # local
     'main.apps.MainConfig',
     'account.apps.AccountConfig',
+    'referral_system.apps.ReferralSystemConfig',
 
 ]
 
