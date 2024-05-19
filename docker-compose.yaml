@@ -1,0 +1,28 @@
+version: 3.10.12
+
+services:
+  app:
+      build: .
+      container_name: app
+      restart: always
+      volumes:
+        - ./:/usr/app/.
+      working_dir: /usr/app/.
+      ports:
+        - "8001:8001"
+      command: python app/src/manage.py runserver 0.0.0.0:8001
+      env_file:
+        - .
+      depends_on:
+        - cache
+      networks:
+        - app_network
+
+    cache:
+      image: redis:latest
+      container_name: cache
+      restart: always
+      networks:
+        - app_network
+      ports:
+        - "5000:5000"
