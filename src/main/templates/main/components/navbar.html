@@ -43,9 +43,10 @@
           </a>
           <ul class="dropdown-menu">
             <li><a class="dropdown-item" href="{% url 'register' %}">Sign up</a></li>
-            <li><a class="dropdown-item" href="{% url 'login' %}">Log in</a></li>
             {% if user.is_authenticated %}
                 <li><a class="dropdown-item" href="{% url 'logout' %}">Log out</a></li>
+            {% else %}
+                <li><a class="dropdown-item" href="{% url 'login' %}">Log in</a></li>
             {% endif %}
           </ul>
         </li>
