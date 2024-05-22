@@ -4,7 +4,7 @@ from django.core.cache import cache
 
 
 def create(key: str, val: str) -> None:
-    cache.set(key, val, timeout=30)
+    cache.set(key, val, timeout=1800)
 
 
 def get(key: str) -> Optional[str]:
