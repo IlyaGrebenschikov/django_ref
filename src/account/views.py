@@ -56,9 +56,14 @@ class UserDetailView(LoginRequiredMixin, DetailView):
 
 class MyLoginView(LoginView):
     model = MyUser
-    template_name = 'account/login.html'
+    template_name = 'account/main_login.html'
     redirect_authenticated_user = True
-    
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['form'] = self.form_class()  # Добавляем форму в контекст
+        return context
+
     def get_success_url(self):
         return reverse_lazy('home') 
 
