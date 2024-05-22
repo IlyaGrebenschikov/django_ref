@@ -1,5 +1,6 @@
 from django.contrib.auth.views import LoginView, LogoutView
 from django.core.exceptions import PermissionDenied
+from django.http import JsonResponse
 from django.shortcuts import render
 from django.contrib import messages
 from django.urls import reverse_lazy
@@ -17,8 +18,14 @@ from .models import MyUser
 
 # Create your views here.
 class UserRegistrationView(CreateView):
-    template_name = 'account/register.html'
+    template_name = 'account/main_register.html'
     form_class = MyCreationForm
+    success_url = ''
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['form'] = self.form_class()  # Добавляем форму в контекст
+        return context
 
     def form_valid(self, form):
         form.save()
@@ -28,6 +35,7 @@ class UserRegistrationView(CreateView):
                             password=cd['password1'])
         login(self.request, user)
         return result
+
 
 
 @method_decorator(login_required, name='dispatch')
