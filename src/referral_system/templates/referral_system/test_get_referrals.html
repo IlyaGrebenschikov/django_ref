@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Referrals</title>
+</head>
+<body>
+    <h1>Referrals for {{ request.user.username }}</h1>
+    <ul>
+        {% for referral in referrals %}
+            <li>{{ referral.username }}</li>
+        {% endfor %}
+    </ul>
+</body>
+</html>
