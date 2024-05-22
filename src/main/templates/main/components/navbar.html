@@ -1,4 +1,4 @@
-<nav class="navbar navbar-expand-lg bg-body-tertiary">
+<nav class="navbar navbar-expand-lg bg-body-tertiary" data-bs-theme="dark">
   <div class="container-fluid">
     <a class="navbar-brand" href="{% url 'home' %}">
         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-r-circle-fill" viewBox="0 0 16 16">
@@ -44,7 +44,9 @@
           <ul class="dropdown-menu">
             <li><a class="dropdown-item" href="{% url 'register' %}">Sign up</a></li>
             <li><a class="dropdown-item" href="{% url 'login' %}">Log in</a></li>
-            <li><a class="dropdown-item" href="{% url 'logout' %}">Log out</a></li>
+            {% if user.is_authenticated %}
+                <li><a class="dropdown-item" href="{% url 'logout' %}">Log out</a></li>
+            {% endif %}
           </ul>
         </li>
       </ul>
