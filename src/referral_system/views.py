@@ -1,5 +1,5 @@
-from django.shortcuts import render
-from django.http import HttpResponseNotFound
+from django.shortcuts import render, redirect
+from django.http import HttpResponseNotFound, JsonResponse
 from django.utils.decorators import method_decorator
 from django.contrib.auth.decorators import login_required
 
@@ -12,11 +12,11 @@ from src.referral_system.cache import create, get, delete
 
 @login_required
 def create_referral_view(request):
-    form = MyInputForm()
+    form = MyInputForm(request.POST)
 
-    if form.is_valid():
+    if request.method == 'POST' and form.is_valid():
         username = request.user.username
-        data = str(form['data'])
+        data = form.cleaned_data['data']
         if get(username):
             delete(data)
             delete(username)
@@ -29,34 +29,35 @@ def create_referral_view(request):
 
 @login_required
 def delete_referral_view(request):
-    form = MyInputForm(request.post)
+    username = request.user.username
+    data = get(username)
+    delete(username)
+    delete(data)
 
-    if form.is_valid():
-        username = request.user.username
-        data = get(username)
-        delete(username)
-        delete(data)
-
-    return
+    return redirect('home')
 
 
 @login_required
 def add_referral_view(request):
-    form = MyInputForm(request.post)
-    data = str(form['data'])
-    referral_name = get(data)
-    if not referral_name:
-        return HttpResponseNotFound('Такой реферральной ссылки не существует!')
-    user = request.user
-    user.referred_by = referral_name
-    user.save()
+    form = MyInputForm(request.POST or None)
 
-    return
+    if request.method == 'POST' and form.is_valid():
+        data = form.cleaned_data['data']
+        referral_name = get(data)
+        if referral_name:
+            username = request.user
+            user = MyUser.objects.get(username=username)
+            user.referred_by = referral_name
+            user.save()
+        else:
+            return HttpResponseNotFound('Такой реферральной ссылки не существует!')
+
+    return render(request, 'referral_system/test_add_referral.html', {'form': form})
 
 
 @login_required
-def get_referrals_view(request):
+def show_referrers_view(request):
     username = request.user.username
     referrals = MyUser.objects.values('username').filter(referred_by=username)
-
-    return
+    context = {'referrals': referrals}
+    return render(request, 'referral_system/test_get_referrals.html', context)
