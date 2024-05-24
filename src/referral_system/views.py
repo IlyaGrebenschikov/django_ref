@@ -52,7 +52,7 @@ def add_referral_view(request):
         else:
             return HttpResponseNotFound('Такой реферральной ссылки не существует!')
 
-    return render(request, 'referral_system/test_add_referral.html', {'form': form})
+    return render(request, 'referral_system/main_add_referral.html', {'form': form})
 
 
 @login_required
