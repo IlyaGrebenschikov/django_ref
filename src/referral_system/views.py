@@ -60,4 +60,4 @@ def show_referrers_view(request):
     username = request.user.username
     referrals = MyUser.objects.values('username').filter(referred_by=username)
     context = {'referrals': referrals}
-    return render(request, 'referral_system/test_get_referrals.html', context)
+    return render(request, 'referral_system/main_get_referrals.html', context)

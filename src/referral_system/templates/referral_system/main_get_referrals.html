@@ -1,0 +1,45 @@
+{% extends 'main/layout.html' %}
+{% load static %}
+{% block title %} My referrs {% endblock title %}
+{% block content %}
+<!-- For demo purpose -->
+<div class="container text-center text-white">
+    <div class="row pt-5">
+        <div class="col-lg-8 mx-auto">
+            <h1 class="display-4">Bootstrap table fixed header</h1>
+            <p class="lead mb-0">Build a bootstrap table with a fixed header and scrollable body using Bootstrap 4.</p>
+            <p class="lead">Snippet by <a href="https://bootstrapious.com/snippets" class="text-white">
+                <u>Bootstrapious</u></a></p>
+            </div>
+        </div>
+    </div><!-- End -->
+
+
+    <div class="container py-5">
+        <div class="row">
+            <div class="col-lg-7 mx-auto bg-white rounded shadow">
+
+                <!-- Fixed header table-->
+                <div class="table-responsive">
+                    <table class="table table-fixed">
+                        <thead>
+                            <tr>
+                                <th scope="col" class="col-3">#</th>
+                                <th scope="col" class="col-3">Username</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                        {% for referral in referrals %}
+                            <tr>
+                                <th scope="row" class="col-3">{{ forloop.counter }}</th>
+                                <td class="col-3">{{ referral.username }}</td>
+                            </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                </div><!-- End -->
+
+            </div>
+        </div>
+    </div>
+{% endblock %}
