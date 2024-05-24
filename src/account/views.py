@@ -1,7 +1,7 @@
 from django.contrib.auth.views import LoginView, LogoutView
 from django.core.exceptions import PermissionDenied
 from django.http import JsonResponse
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.contrib import messages
 from django.urls import reverse_lazy
 from django.views.generic import CreateView, DetailView
@@ -9,7 +9,7 @@ from django.utils.decorators import method_decorator
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.forms import UserCreationForm
-from django.contrib.auth import authenticate, login
+from django.contrib.auth import authenticate, login, logout
 from django.urls import reverse
 
 from .forms import MyCreationForm
@@ -70,10 +70,8 @@ class MyLoginView(LoginView):
     def form_invalid(self, form):
         messages.error(self.request, 'Invalid username or password')
         return self.render_to_response(self.get_context_data(form=form))
-    
-    
-class MyLogoutView(LogoutView):
-    template_name = 'account/logout.html'
-    next_page = 'home'
-    http_method_names = ['get', 'post']
-    
+
+
+def logout_view(request):
+    logout(request)
+    return redirect('home')
