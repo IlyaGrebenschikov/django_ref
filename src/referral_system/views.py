@@ -1,6 +1,5 @@
 from django.shortcuts import render, redirect
-from django.http import HttpResponseNotFound, JsonResponse
-from django.utils.decorators import method_decorator
+from django.http import HttpResponseNotFound
 from django.contrib.auth.decorators import login_required
 
 from src.referral_system.forms import MyInputForm

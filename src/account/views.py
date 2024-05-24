@@ -1,14 +1,11 @@
-from django.contrib.auth.views import LoginView, LogoutView
-from django.core.exceptions import PermissionDenied
-from django.http import JsonResponse
-from django.shortcuts import render, redirect
+from django.contrib.auth.views import LoginView
+from django.shortcuts import redirect
 from django.contrib import messages
 from django.urls import reverse_lazy
 from django.views.generic import CreateView, DetailView
 from django.utils.decorators import method_decorator
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.decorators import login_required
-from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth import authenticate, login, logout
 from django.urls import reverse
 
