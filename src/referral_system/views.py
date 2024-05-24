@@ -24,7 +24,7 @@ def create_referral_view(request):
         create(username, data)
         create(data, username)
 
-    return render(request, 'referral_system/test_create.html', {'form': form})
+    return render(request, 'referral_system/main_create.html', {'form': form})
 
 
 @login_required
